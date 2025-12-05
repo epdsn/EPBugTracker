@@ -1,0 +1,67 @@
+# Build Folders
+bin/
+obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Rider
+.idea/
+*.sln.iml
+
+# Mac
+.DS_Store
+
+# NuGet
+*.nupkg
+.nuget/
+
+# Logs
+*.log
+
+# Visual Studio Code
+.vscode/
+
+# User-specific files
+*.userprefs
+
+# Publish
+PublishProfiles/
+
+# Resharper
+_ReSharper*/
+*.DotSettings
+
+# dotnet watch
+.dotnetwatch/
+
+# Maui specific
+**/Platforms/**/obj/
+**/Platforms/**/bin/
+
+# Android packages
+*.apk
+*.ap_ 
+*.aab
+
+# Dotnet core
+project.lock.json
+
+# Certificates
+*.pfx
+
+# Local secrets
+appsettings.Development.json
+secrets.json
+
+# OS generated files
+Thumbs.db
+ehthumbs.db
+
+# Rider
+.idea/
+
+# JetBrains Rider caches
+.idea/**/workspace.xml
