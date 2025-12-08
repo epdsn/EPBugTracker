@@ -2,7 +2,9 @@
 using System.Text;
 using System.Xml.Serialization;
 using System.IO;
+using System.Linq;
 using Microsoft.Maui.Controls;
+using Microsoft.Maui.Storage;
 
 namespace EPBugTracker
 {
@@ -12,9 +14,14 @@ namespace EPBugTracker
         public ObservableCollection<BugItem> InProgressBugs { get; } = new();
         public ObservableCollection<BugItem> ResolvedBugs { get; } = new();
 
+        readonly string dataFilePath;
+        bool isLoading = false;
+
         public MainPage()
         {
             InitializeComponent();
+
+            dataFilePath = Path.Combine(FileSystem.AppDataDirectory, "bugs.xml");
 
             var newCollection = this.FindByName<CollectionView>("NewCollection");
             var inProgressCollection = this.FindByName<CollectionView>("InProgressCollection");
@@ -23,6 +30,72 @@ namespace EPBugTracker
             if (newCollection != null) newCollection.ItemsSource = NewBugs;
             if (inProgressCollection != null) inProgressCollection.ItemsSource = InProgressBugs;
             if (resolvedCollection != null) resolvedCollection.ItemsSource = ResolvedBugs;
+
+            // Load persisted data
+            LoadFromFile();
+        }
+
+        void LoadFromFile()
+        {
+            if (!File.Exists(dataFilePath)) return;
+
+            try
+            {
+                isLoading = true;
+                var xs = new XmlSerializer(typeof(List<BugItem>));
+                using var fs = File.OpenRead(dataFilePath);
+                using var reader = new StreamReader(fs, Encoding.UTF8);
+                var items = (List<BugItem>?)xs.Deserialize(reader);
+                if (items != null)
+                {
+                    foreach (var b in items)
+                    {
+                        // Ensure collections are cleared first
+                        // We'll add to the appropriate collection without triggering save
+                        switch (b.Status)
+                        {
+                            case BugStatus.New: NewBugs.Add(b); break;
+                            case BugStatus.InProgress: InProgressBugs.Add(b); break;
+                            case BugStatus.Resolved: ResolvedBugs.Add(b); break;
+                            default: NewBugs.Add(b); break;
+                        }
+                    }
+
+                    RefreshCollections();
+                }
+            }
+            catch
+            {
+                // ignore load errors for now
+            }
+            finally
+            {
+                isLoading = false;
+            }
+        }
+
+        void SaveAll()
+        {
+            try
+            {
+                var all = new List<BugItem>();
+                all.AddRange(NewBugs);
+                all.AddRange(InProgressBugs);
+                all.AddRange(ResolvedBugs);
+
+                var xs = new XmlSerializer(typeof(List<BugItem>));
+                // ensure directory exists
+                var dir = Path.GetDirectoryName(dataFilePath);
+                if (!string.IsNullOrEmpty(dir) && !Directory.Exists(dir)) Directory.CreateDirectory(dir);
+
+                using var fs = File.Create(dataFilePath);
+                using var writer = new StreamWriter(fs, Encoding.UTF8);
+                xs.Serialize(writer, all);
+            }
+            catch
+            {
+                // ignore save errors for now
+            }
         }
 
         private async void OnImportClicked(object? sender, EventArgs e)
@@ -99,6 +172,8 @@ namespace EPBugTracker
             }
 
             RefreshCollections();
+
+            if (!isLoading) SaveAll();
         }
 
         private async void OnAssignClicked(object? sender, EventArgs e)
@@ -110,6 +185,7 @@ namespace EPBugTracker
                 {
                     bug.AssigneeEmail = email;
                     RefreshCollections();
+                    if (!isLoading) SaveAll();
                 }
             }
         }
@@ -141,6 +217,7 @@ namespace EPBugTracker
                 if (choice == "Resolved") { bug.Status = BugStatus.Resolved; ResolvedBugs.Add(bug); }
 
                 RefreshCollections();
+                if (!isLoading) SaveAll();
             }
         }
 
