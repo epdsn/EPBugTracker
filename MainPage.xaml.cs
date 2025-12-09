@@ -1,10 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Text;
 using System.Xml.Serialization;
-using System.IO;
-using System.Linq;
-using Microsoft.Maui.Controls;
-using Microsoft.Maui.Storage;
 
 namespace EPBugTracker
 {
@@ -135,11 +131,11 @@ namespace EPBugTracker
                 }
                 catch { }
 
-                await DisplayAlert("Import", "Could not parse file as JSON or XML of bug items.", "OK");
+                await DisplayAlertAsync("Import", "Could not parse file as JSON or XML of bug items.", "OK");
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Error", ex.Message, "OK");
+                await DisplayAlertAsync("Error", ex.Message, "OK");
             }
         }
 
@@ -205,7 +201,7 @@ namespace EPBugTracker
         {
             if (sender is Button btn && btn.BindingContext is BugItem bug)
             {
-                var choice = await DisplayActionSheet("Move to", "Cancel", null, "New", "InProgress", "Resolved");
+                var choice = await DisplayActionSheetAsync("Move to", "Cancel", null, "New", "InProgress", "Resolved");
                 if (choice == "Cancel" || string.IsNullOrEmpty(choice)) return;
 
                 NewBugs.Remove(bug);
@@ -227,7 +223,7 @@ namespace EPBugTracker
             {
                 if (string.IsNullOrWhiteSpace(bug.AssigneeEmail))
                 {
-                    await DisplayAlert("Email", "No assignee email set.", "OK");
+                    await DisplayAlertAsync("Email", "No assignee email set.", "OK");
                     return;
                 }
 
@@ -243,11 +239,11 @@ namespace EPBugTracker
                 }
                 catch (FeatureNotSupportedException)
                 {
-                    await DisplayAlert("Email", "Email is not supported on this device.", "OK");
+                    await DisplayAlertAsync("Email", "Email is not supported on this device.", "OK");
                 }
                 catch (Exception ex)
                 {
-                    await DisplayAlert("Email error", ex.Message, "OK");
+                    await DisplayAlertAsync("Email error", ex.Message, "OK");
                 }
             }
         }
