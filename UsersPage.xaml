@@ -4,24 +4,40 @@
              Title="Users">
 
     <VerticalStackLayout Padding="12" Spacing="12">
-        <HorizontalStackLayout Spacing="8">
-            <Entry x:Name="NameEntry" Placeholder="Name" HorizontalOptions="FillAndExpand" />
-            <Entry x:Name="EmailEntry" Placeholder="Email" HorizontalOptions="FillAndExpand" />
-            <Button Text="Add/Update" Clicked="OnAddUpdateClicked" />
-        </HorizontalStackLayout>
+        <Grid ColumnSpacing="8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Entry x:Name="NameEntry" Placeholder="Name" Grid.Row="0" />
+            <Entry x:Name="EmailEntry" Placeholder="Email" Grid.Row="1" />
+            <Button Text="Add/Update" Clicked="OnAddUpdateClicked" Grid.Row="2" />
+        </Grid>
 
         <CollectionView x:Name="UsersCollection" SelectionMode="Single">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame Padding="8" Margin="4" BorderColor="#ccc">
+                    <Border Stroke="#ccc" StrokeThickness="1" Padding="8" Margin="4">
                         <HorizontalStackLayout>
-                            <VerticalStackLayout HorizontalOptions="FillAndExpand">
-                                <Label Text="{Binding Name}" FontAttributes="Bold" />
-                                <Label Text="{Binding Email}" FontSize="12" TextColor="#666" />
-                            </VerticalStackLayout>
-                            <Button Text="Remove" Clicked="OnRemoveClicked" />
+                            <Grid ColumnDefinitions="*,Auto" VerticalOptions="Fill">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Label Text="{Binding Name}" FontAttributes="Bold" Grid.Row="0" />
+                                    <Label Text="{Binding Email}" FontSize="12" TextColor="#666" Grid.Row="1" />
+                                </Grid>
+                                <Button Text="Remove" Clicked="OnRemoveClicked" Grid.Column="1" VerticalOptions="Center" />
+                            </Grid>
                         </HorizontalStackLayout>
-                    </Frame>
+                    </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
