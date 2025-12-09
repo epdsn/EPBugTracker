@@ -1,6 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using System.Text;
 using System.Xml.Serialization;
+using System.Security.Cryptography;
+using System.IO;
 
 namespace EPBugTracker
 {
@@ -246,6 +248,107 @@ namespace EPBugTracker
                 {
                     await DisplayAlertAsync("Email error", ex.Message, "OK");
                 }
+            }
+        }
+
+        private async void OnDiagnosticsClicked(object? sender, EventArgs e)
+        {
+            try
+            {
+                var sb = new StringBuilder();
+                sb.AppendLine($"AppDataDirectory: {FileSystem.AppDataDirectory}");
+                sb.AppendLine($"Bugs file: {dataFilePath}");
+
+                // Try to locate the main executable
+                string? exePath = null;
+#if WINDOWS
+                exePath = System.Diagnostics.Process.GetCurrentProcess().MainModule?.FileName;
+#else
+                exePath = System.Diagnostics.Process.GetCurrentProcess().MainModule?.FileName;
+#endif
+                sb.AppendLine($"ExePath: {exePath}");
+
+                if (!string.IsNullOrEmpty(exePath) && File.Exists(exePath))
+                {
+                    // compute SHA256
+                    try
+                    {
+                        using var fs = File.OpenRead(exePath);
+                        using var sha = SHA256.Create();
+                        var hash = sha.ComputeHash(fs);
+                        var hex = BitConverter.ToString(hash).Replace("-", "");
+                        sb.AppendLine($"SHA256: {hex}");
+                    }
+                    catch (Exception ex)
+                    {
+                        sb.AppendLine($"SHA256 error: {ex.Message}");
+                    }
+
+                    // Authenticode signature info (Windows only)
+                    try
+                    {
+                        var sig = System.Security.Cryptography.X509Certificates.X509Certificate.CreateFromSignedFile(exePath);
+                        if (sig != null)
+                        {
+                            sb.AppendLine($"Certificate Subject: {sig.Subject}");
+                            sb.AppendLine($"Certificate Issuer: {sig.Issuer}");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        sb.AppendLine($"Signature info error: {ex.Message}");
+                    }
+                }
+
+                // Try to read recent CodeIntegrity events via wevtutil (Windows)
+                try
+                {
+                    if (OperatingSystem.IsWindows())
+                    {
+                        var psi = new System.Diagnostics.ProcessStartInfo("wevtutil", "qe Microsoft-Windows-CodeIntegrity/Operational /c:5 /f:text")
+                        {
+                            RedirectStandardOutput = true,
+                            RedirectStandardError = true,
+                            UseShellExecute = false,
+                            CreateNoWindow = true
+                        };
+                        using var proc = System.Diagnostics.Process.Start(psi);
+                        if (proc != null)
+                        {
+                            var outp = await proc.StandardOutput.ReadToEndAsync();
+                            var err = await proc.StandardError.ReadToEndAsync();
+                            if (!string.IsNullOrEmpty(outp)) sb.AppendLine("CodeIntegrity recent events:\n" + outp);
+                            if (!string.IsNullOrEmpty(err)) sb.AppendLine("CodeIntegrity error output:\n" + err);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    sb.AppendLine($"Event read error: {ex.Message}");
+                }
+
+                var text = sb.ToString();
+
+                // Copy to clipboard
+                await Clipboard.SetTextAsync(text);
+
+                // Also write to Desktop so you can inspect without relying on clipboard
+                try
+                {
+                    var desktop = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+                    var outPath = Path.Combine(desktop ?? FileSystem.AppDataDirectory, "epbug_diagnostics.txt");
+                    await File.WriteAllTextAsync(outPath, text, Encoding.UTF8);
+                    await DisplayAlert("Diagnostics saved", $"Diagnostics copied to clipboard and written to:\n{outPath}", "OK");
+                }
+                catch (Exception ex)
+                {
+                    // If file write fails, still inform user that clipboard succeeded
+                    await DisplayAlert("Diagnostics copied", $"Diagnostics copied to clipboard. Failed to write to Desktop: {ex.Message}", "OK");
+                }
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Diagnostics error", ex.Message, "OK");
             }
         }
     }

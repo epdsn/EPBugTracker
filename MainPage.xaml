@@ -8,6 +8,7 @@
             <Label Text="EP Bug Tracker" FontSize="24" VerticalOptions="Center" />
             <Button Text="Import" x:Name="ImportBtn" Clicked="OnImportClicked" HorizontalOptions="End" />
             <Button Text="Add Bug" Clicked="OnAddBugClicked" />
+            <Button Text="Diagnostics" Clicked="OnDiagnosticsClicked" />
         </HorizontalStackLayout>
 
         <Grid ColumnSpacing="8">

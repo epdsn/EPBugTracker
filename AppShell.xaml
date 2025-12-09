@@ -6,9 +6,15 @@
     xmlns:local="clr-namespace:EPBugTracker"
     Title="EPBugTracker">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <TabBar>
+        <ShellContent
+            Title="Home"
+            ContentTemplate="{DataTemplate local:MainPage}"
+            Route="MainPage" />
+        <ShellContent
+            Title="Users"
+            ContentTemplate="{DataTemplate local:UsersPage}"
+            Route="UsersPage" />
+    </TabBar>
 
 </Shell>

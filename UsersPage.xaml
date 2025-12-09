@@ -1,0 +1,30 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EPBugTracker.UsersPage"
+             Title="Users">
+
+    <VerticalStackLayout Padding="12" Spacing="12">
+        <HorizontalStackLayout Spacing="8">
+            <Entry x:Name="NameEntry" Placeholder="Name" HorizontalOptions="FillAndExpand" />
+            <Entry x:Name="EmailEntry" Placeholder="Email" HorizontalOptions="FillAndExpand" />
+            <Button Text="Add/Update" Clicked="OnAddUpdateClicked" />
+        </HorizontalStackLayout>
+
+        <CollectionView x:Name="UsersCollection" SelectionMode="Single">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="8" Margin="4" BorderColor="#ccc">
+                        <HorizontalStackLayout>
+                            <VerticalStackLayout HorizontalOptions="FillAndExpand">
+                                <Label Text="{Binding Name}" FontAttributes="Bold" />
+                                <Label Text="{Binding Email}" FontSize="12" TextColor="#666" />
+                            </VerticalStackLayout>
+                            <Button Text="Remove" Clicked="OnRemoveClicked" />
+                        </HorizontalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+
+</ContentPage>
