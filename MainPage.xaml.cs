@@ -89,10 +89,28 @@ namespace EPBugTracker
                 using var fs = File.Create(dataFilePath);
                 using var writer = new StreamWriter(fs, Encoding.UTF8);
                 xs.Serialize(writer, all);
+
+#if DEBUG
+                System.Diagnostics.Debug.WriteLine($"SaveAll: wrote {all.Count} items to {dataFilePath}");
+                try
+                {
+                    _ = Dispatcher.DispatchAsync(async () => await DisplayAlert("Saved", $"Wrote {all.Count} bug(s) to:\n{dataFilePath}", "OK"));
+                }
+                catch { }
+#endif
             }
-            catch
+            catch (Exception ex)
             {
-                // ignore save errors for now
+                // Log and show an alert so save errors aren't silently ignored
+                System.Diagnostics.Debug.WriteLine($"SaveAll error: {ex}");
+                try
+                {
+                    _ = Dispatcher.DispatchAsync(async () => await DisplayAlert("Save error", ex.Message, "OK"));
+                }
+                catch
+                {
+                    // ignore any UI dispatch errors
+                }
             }
         }
 
