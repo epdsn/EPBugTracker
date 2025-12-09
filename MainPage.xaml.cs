@@ -367,6 +367,15 @@ namespace EPBugTracker
                 await DisplayAlert("Diagnostics error", ex.Message, "OK");
             }
         }
+
+        public void ReloadFromDisk()
+        {
+            // Clear existing collections and reload from the persisted file
+            NewBugs.Clear();
+            InProgressBugs.Clear();
+            ResolvedBugs.Clear();
+            LoadFromFile();
+        }
     }
 
     public enum BugStatus { New, InProgress, Resolved }
@@ -379,5 +388,9 @@ namespace EPBugTracker
         public BugStatus Status { get; set; } = BugStatus.New;
         public string AssigneeEmail { get; set; } = string.Empty;
         public string Project { get; set; } = string.Empty;
+        // New fields
+        public string RepeatableSteps { get; set; } = string.Empty;
+        public List<string> ImagePaths { get; set; } = new();
+        public List<string> Steps { get; set; } = new();
     }
 }

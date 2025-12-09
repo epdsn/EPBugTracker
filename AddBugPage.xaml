@@ -11,11 +11,38 @@
             <Label Text="Description" />
             <Editor x:Name="DescriptionEditor" AutoSize="TextChanges" HeightRequest="120" />
 
+            <!-- Repeatable steps: freeform editor and a simple step list -->
+            <Label Text="Repeatable Steps (freeform)" />
+            <Editor x:Name="RepeatableStepsEditor" AutoSize="TextChanges" HeightRequest="100" />
+
+            <Label Text="Repeatable Steps (list)" />
+            <HorizontalStackLayout Spacing="8">
+                <Entry x:Name="StepEntry" Placeholder="Add a step" HorizontalOptions="FillAndExpand" />
+                <Button Text="Add Step" Clicked="OnAddStepClicked" />
+            </HorizontalStackLayout>
+
+            <CollectionView x:Name="StepsCollection" ItemsLayout="VerticalList" HeightRequest="120">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <HorizontalStackLayout Padding="4" Spacing="8" VerticalOptions="Center">
+                            <Label Text="{Binding .}" HorizontalOptions="StartAndExpand" />
+                            <Button Text="Remove" Clicked="OnRemoveStepClicked" CommandParameter="{Binding .}" />
+                        </HorizontalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
             <Label Text="Project" />
             <Entry x:Name="ProjectEntry" Placeholder="Project / Category" />
 
             <Label Text="Assignee Email" />
             <Entry x:Name="AssigneeEntry" Placeholder="Assignee email" Keyboard="Email" />
+
+            <Label Text="Attachments" />
+            <ScrollView Orientation="Horizontal" HeightRequest="110">
+                <HorizontalStackLayout x:Name="ImagesPanel" Spacing="8" Padding="4" />
+            </ScrollView>
+            <Button Text="Add Attachment" Clicked="OnAddImageClicked" />
 
             <Label Text="Status" />
             <Picker x:Name="StatusPicker">
