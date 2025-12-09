@@ -4,21 +4,32 @@
              Title="Users">
 
     <VerticalStackLayout Padding="12" Spacing="12">
-        <Grid ColumnSpacing="8">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Entry x:Name="NameEntry" Placeholder="Name" Grid.Row="0" />
-            <Entry x:Name="EmailEntry" Placeholder="Email" Grid.Row="1" />
-            <Button Text="Add/Update" Clicked="OnAddUpdateClicked" Grid.Row="2" />
-        </Grid>
+        <!-- Centered, fixed-width container for the form -->
+        <Frame HorizontalOptions="Center"
+               VerticalOptions="Start"
+               WidthRequest="600"
+               MaxWidthRequest="600"
+               Padding="12"
+               CornerRadius="8"
+               HasShadow="True">
+
+            <Grid ColumnSpacing="8" RowSpacing="8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Entry x:Name="NameEntry" Placeholder="Name" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" />
+                <Entry x:Name="EmailEntry" Placeholder="Email" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" />
+                <Button Text="Add/Update" Clicked="OnAddUpdateClicked" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Start" Margin="0,4,0,0" />
+            </Grid>
+        </Frame>
 
         <CollectionView x:Name="UsersCollection" SelectionMode="Single">
             <CollectionView.ItemTemplate>
