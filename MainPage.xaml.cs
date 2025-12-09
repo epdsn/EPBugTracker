@@ -144,8 +144,9 @@ namespace EPBugTracker
             var title = await DisplayPromptAsync("New Bug", "Title:");
             if (string.IsNullOrWhiteSpace(title)) return;
             var desc = await DisplayPromptAsync("New Bug", "Description:");
+            var project = await DisplayPromptAsync("Project", "Project / Category (optional):");
 
-            var bug = new BugItem { Id = Guid.NewGuid().ToString(), Title = title, Description = desc ?? string.Empty, Status = BugStatus.New };
+            var bug = new BugItem { Id = Guid.NewGuid().ToString(), Title = title, Description = desc ?? string.Empty, Status = BugStatus.New, Project = project ?? string.Empty };
             AddToCollection(bug);
         }
 
@@ -258,5 +259,6 @@ namespace EPBugTracker
         public string Description { get; set; } = string.Empty;
         public BugStatus Status { get; set; } = BugStatus.New;
         public string AssigneeEmail { get; set; } = string.Empty;
+        public string Project { get; set; } = string.Empty;
     }
 }

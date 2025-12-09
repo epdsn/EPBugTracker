@@ -27,6 +27,7 @@
                                 <Frame BorderColor="#ccc" Padding="8" Margin="4">
                                     <VerticalStackLayout>
                                         <Label Text="{Binding Title}" FontAttributes="Bold" />
+                                        <Label Text="{Binding Project}" FontSize="12" TextColor="#444" />
                                         <Label Text="{Binding Description}" LineBreakMode="TailTruncation" />
                                         <Label Text="Assignee: {Binding AssigneeEmail}" FontSize="12" TextColor="#666" />
                                         <HorizontalStackLayout Spacing="6">
@@ -52,6 +53,7 @@
                                 <Frame BorderColor="#ccc" Padding="8" Margin="4">
                                     <VerticalStackLayout>
                                         <Label Text="{Binding Title}" FontAttributes="Bold" />
+                                        <Label Text="{Binding Project}" FontSize="12" TextColor="#444" />
                                         <Label Text="{Binding Description}" LineBreakMode="TailTruncation" />
                                         <Label Text="Assignee: {Binding AssigneeEmail}" FontSize="12" TextColor="#666" />
                                         <HorizontalStackLayout Spacing="6">
@@ -77,6 +79,7 @@
                                 <Frame BorderColor="#ccc" Padding="8" Margin="4">
                                     <VerticalStackLayout>
                                         <Label Text="{Binding Title}" FontAttributes="Bold" />
+                                        <Label Text="{Binding Project}" FontSize="12" TextColor="#444" />
                                         <Label Text="{Binding Description}" LineBreakMode="TailTruncation" />
                                         <Label Text="Assignee: {Binding AssigneeEmail}" FontSize="12" TextColor="#666" />
                                         <HorizontalStackLayout Spacing="6">
