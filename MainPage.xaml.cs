@@ -143,16 +143,14 @@ namespace EPBugTracker
 
         private async void OnAddBugClicked(object? sender, EventArgs e)
         {
-            var title = await DisplayPromptAsync("New Bug", "Title:");
-            if (string.IsNullOrWhiteSpace(title)) return;
-            var desc = await DisplayPromptAsync("New Bug", "Description:");
-            var project = await DisplayPromptAsync("Project", "Project / Category (optional):");
-
-            var bug = new BugItem { Id = Guid.NewGuid().ToString(), Title = title, Description = desc ?? string.Empty, Status = BugStatus.New, Project = project ?? string.Empty };
-            AddToCollection(bug);
+            // Navigate to the AddBugPage which exposes all BugItem properties for entry
+            if (Navigation != null)
+            {
+                await Navigation.PushAsync(new AddBugPage());
+            }
         }
 
-        private void AddToCollection(BugItem bug)
+        public void AddToCollection(BugItem bug)
         {
             switch (bug.Status)
             {

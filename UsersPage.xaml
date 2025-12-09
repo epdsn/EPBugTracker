@@ -8,7 +8,6 @@
         <Frame HorizontalOptions="Center"
                VerticalOptions="Start"
                WidthRequest="600"
-               MaxWidthRequest="600"
                Padding="12"
                CornerRadius="8"
                HasShadow="True">

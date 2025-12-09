@@ -1,0 +1,35 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EPBugTracker.AddBugPage"
+             Title="Add Bug">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="12">
+            <Label Text="Title" />
+            <Entry x:Name="TitleEntry" Placeholder="Title" />
+
+            <Label Text="Description" />
+            <Editor x:Name="DescriptionEditor" AutoSize="TextChanges" HeightRequest="120" />
+
+            <Label Text="Project" />
+            <Entry x:Name="ProjectEntry" Placeholder="Project / Category" />
+
+            <Label Text="Assignee Email" />
+            <Entry x:Name="AssigneeEntry" Placeholder="Assignee email" Keyboard="Email" />
+
+            <Label Text="Status" />
+            <Picker x:Name="StatusPicker">
+                <Picker.Items>
+                    <x:String>New</x:String>
+                    <x:String>InProgress</x:String>
+                    <x:String>Resolved</x:String>
+                </Picker.Items>
+            </Picker>
+
+            <HorizontalStackLayout Spacing="12" HorizontalOptions="End">
+                <Button Text="Cancel" Clicked="OnCancelClicked" />
+                <Button Text="Save" Clicked="OnSaveClicked" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
