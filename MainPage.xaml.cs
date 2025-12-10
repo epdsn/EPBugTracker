@@ -376,6 +376,15 @@ namespace EPBugTracker
             ResolvedBugs.Clear();
             LoadFromFile();
         }
+
+        private void OnReloadClicked(object? sender, EventArgs e)
+        {
+            // Reload data from file and refresh UI
+            NewBugs.Clear();
+            InProgressBugs.Clear();
+            ResolvedBugs.Clear();
+            LoadFromFile();
+        }
     }
 
     public enum BugStatus { New, InProgress, Resolved }

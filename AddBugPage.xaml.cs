@@ -145,6 +145,8 @@ namespace EPBugTracker
             if (mainInstance != null)
             {
                 mainInstance.AddToCollection(bug);
+                // ensure UI and persisted file are reloaded so main view is up to date
+                try { mainInstance.ReloadFromDisk(); } catch { }
                 added = true;
             }
 

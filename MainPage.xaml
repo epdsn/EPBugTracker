@@ -9,6 +9,7 @@
             <Button Text="Import" x:Name="ImportBtn" Clicked="OnImportClicked" HorizontalOptions="End" />
             <Button Text="Add Bug" Clicked="OnAddBugClicked" />
             <Button Text="Diagnostics" Clicked="OnDiagnosticsClicked" />
+            <Button Text="Reload" Clicked="OnReloadClicked" />
         </HorizontalStackLayout>
 
         <Grid ColumnSpacing="8">
