@@ -26,13 +26,13 @@
             </Grid.ColumnDefinitions>
 
             <!-- New -->
-            <Frame Grid.Column="0" BorderColor="#888" Padding="8">
+            <Border Grid.Column="0" Stroke="#888" Padding="8">
                 <VerticalStackLayout>
                     <Label Text="New" FontAttributes="Bold" />
                     <CollectionView x:Name="NewCollection" SelectionMode="None">
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <Frame BorderColor="#ccc" Padding="8" Margin="4">
+                                <Border Stroke="#ccc" StrokeThickness="1" Padding="8" Margin="4">
                                     <VerticalStackLayout>
                                         <Label Text="{Binding Title}" FontAttributes="Bold" />
                                         <Label Text="{Binding Project}" FontSize="12" TextColor="#444" />
@@ -45,21 +45,21 @@
                                             <Button Text="Email" Clicked="OnEmailClicked" />
                                         </HorizontalStackLayout>
                                     </VerticalStackLayout>
-                                </Frame>
+                                </Border>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
                 </VerticalStackLayout>
-            </Frame>
+            </Border>
 
             <!-- In Progress -->
-            <Frame Grid.Column="1" BorderColor="#888" Padding="8">
+            <Border Grid.Column="1" Stroke="#888" Padding="8">
                 <VerticalStackLayout>
                     <Label Text="In Progress" FontAttributes="Bold" />
                     <CollectionView x:Name="InProgressCollection" SelectionMode="None">
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <Frame BorderColor="#ccc" Padding="8" Margin="4">
+                                <Border Stroke="#ccc" StrokeThickness="1" Padding="8" Margin="4">
                                     <VerticalStackLayout>
                                         <Label Text="{Binding Title}" FontAttributes="Bold" />
                                         <Label Text="{Binding Project}" FontSize="12" TextColor="#444" />
@@ -72,21 +72,21 @@
                                             <Button Text="Email" Clicked="OnEmailClicked" />
                                         </HorizontalStackLayout>
                                     </VerticalStackLayout>
-                                </Frame>
+                                </Border>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
                 </VerticalStackLayout>
-            </Frame>
+            </Border>
 
             <!-- Resolved -->
-            <Frame Grid.Column="2" BorderColor="#888" Padding="8">
+            <Border Grid.Column="2" Stroke="#888" Padding="8">
                 <VerticalStackLayout>
                     <Label Text="Resolved" FontAttributes="Bold" />
                     <CollectionView x:Name="ResolvedCollection" SelectionMode="None">
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <Frame BorderColor="#ccc" Padding="8" Margin="4">
+                                <Border Stroke="#ccc" StrokeThickness="1" Padding="8" Margin="4">
                                     <VerticalStackLayout>
                                         <Label Text="{Binding Title}" FontAttributes="Bold" />
                                         <Label Text="{Binding Project}" FontSize="12" TextColor="#444" />
@@ -99,12 +99,12 @@
                                             <Button Text="Email" Clicked="OnEmailClicked" />
                                         </HorizontalStackLayout>
                                     </VerticalStackLayout>
-                                </Frame>
+                                </Border>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
                 </VerticalStackLayout>
-            </Frame>
+            </Border>
 
         </Grid>
 
