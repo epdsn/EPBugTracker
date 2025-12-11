@@ -6,6 +6,13 @@
     xmlns:local="clr-namespace:EPBugTracker"
     Title="EPBugTracker">
 
+    <!-- Global title view shown in the top navigation area on every page -->
+    <Shell.TitleView>
+        <Grid Padding="8">
+            <Label Text="EP Bug Tracker" FontSize="20" VerticalOptions="Center" HorizontalOptions="Start" />
+        </Grid>
+    </Shell.TitleView>
+
     <TabBar>
         <ShellContent
             Title="Home"

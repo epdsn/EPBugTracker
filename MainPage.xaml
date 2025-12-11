@@ -4,13 +4,19 @@
              x:Class="EPBugTracker.MainPage">
 
     <VerticalStackLayout Padding="12" Spacing="12">
-        <HorizontalStackLayout HorizontalOptions="Fill" Spacing="8">
-            <Label Text="EP Bug Tracker" FontSize="24" VerticalOptions="Center" />
-            <Button Text="Import" x:Name="ImportBtn" Clicked="OnImportClicked" HorizontalOptions="End" />
-            <Button Text="Add Bug" Clicked="OnAddBugClicked" />
-            <Button Text="Diagnostics" Clicked="OnDiagnosticsClicked" />
-            <Button Text="Reload" Clicked="OnReloadClicked" />
-        </HorizontalStackLayout>
+        <!-- Top bar: title on the far left, actions on the right -->
+        <Grid HorizontalOptions="Fill" ColumnSpacing="8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <HorizontalStackLayout Grid.Column="1" Spacing="8" HorizontalOptions="End">
+                <Button Text="Import" x:Name="ImportBtn" Clicked="OnImportClicked" />
+                <Button Text="Add Bug" Clicked="OnAddBugClicked" />
+                <Button Text="Diagnostics" Clicked="OnDiagnosticsClicked" />
+                <Button Text="Reload" Clicked="OnReloadClicked" />
+            </HorizontalStackLayout>
+        </Grid>
 
         <Grid ColumnSpacing="8">
             <Grid.ColumnDefinitions>
