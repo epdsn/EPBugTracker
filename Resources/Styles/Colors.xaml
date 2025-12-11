@@ -12,6 +12,12 @@
     <Color x:Key="SecondaryDarkText">#9880e5</Color>
     <Color x:Key="Tertiary">#2B0B98</Color>
 
+    <!-- Toolbar colors -->
+    <!-- rgba(17,24,39,0.5) -> #80111727 (AARRGGBB) -->
+    <Color x:Key="ToolbarBackground">#80111727</Color>
+    <Color x:Key="ToolbarBorder">#1F2937</Color>
+    <Color x:Key="RouteLink">#D1D5DB</Color>
+
     <Color x:Key="White">White</Color>
     <Color x:Key="Black">Black</Color>
     <Color x:Key="Magenta">#D600AA</Color>
@@ -32,6 +38,10 @@
     <SolidColorBrush x:Key="TertiaryBrush" Color="{StaticResource Tertiary}"/>
     <SolidColorBrush x:Key="WhiteBrush" Color="{StaticResource White}"/>
     <SolidColorBrush x:Key="BlackBrush" Color="{StaticResource Black}"/>
+
+    <SolidColorBrush x:Key="ToolbarBackgroundBrush" Color="{StaticResource ToolbarBackground}" />
+    <SolidColorBrush x:Key="ToolbarBorderBrush" Color="{StaticResource ToolbarBorder}" />
+    <SolidColorBrush x:Key="RouteLinkBrush" Color="{StaticResource RouteLink}" />
 
     <SolidColorBrush x:Key="Gray100Brush" Color="{StaticResource Gray100}"/>
     <SolidColorBrush x:Key="Gray200Brush" Color="{StaticResource Gray200}"/>
