@@ -40,6 +40,12 @@ namespace EPBugTracker
             try
             {
                 isLoading = true;
+
+                // Clear existing collections before loading
+                NewBugs.Clear();
+                InProgressBugs.Clear();
+                ResolvedBugs.Clear();
+
                 var xs = new XmlSerializer(typeof(List<BugItem>));
                 using var fs = File.OpenRead(dataFilePath);
                 using var reader = new StreamReader(fs, Encoding.UTF8);
@@ -48,7 +54,6 @@ namespace EPBugTracker
                 {
                     foreach (var b in items)
                     {
-                        // Ensure collections are cleared first
                         // We'll add to the appropriate collection without triggering save
                         switch (b.Status)
                         {
@@ -354,17 +359,17 @@ namespace EPBugTracker
                     var desktop = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
                     var outPath = Path.Combine(desktop ?? FileSystem.AppDataDirectory, "epbug_diagnostics.txt");
                     await File.WriteAllTextAsync(outPath, text, Encoding.UTF8);
-                    await DisplayAlert("Diagnostics saved", $"Diagnostics copied to clipboard and written to:\n{outPath}", "OK");
+                    await DisplayAlertAsync("Diagnostics saved", $"Diagnostics copied to clipboard and written to:\n{outPath}", "OK");
                 }
                 catch (Exception ex)
                 {
                     // If file write fails, still inform user that clipboard succeeded
-                    await DisplayAlert("Diagnostics copied", $"Diagnostics copied to clipboard. Failed to write to Desktop: {ex.Message}", "OK");
+                    await DisplayAlertAsync("Diagnostics copied", $"Diagnostics copied to clipboard. Failed to write to Desktop: {ex.Message}", "OK");
                 }
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Diagnostics error", ex.Message, "OK");
+                await DisplayAlertAsync("Diagnostics error", ex.Message, "OK");
             }
         }
 
@@ -392,6 +397,128 @@ namespace EPBugTracker
             {
                 await Navigation.PushAsync(new EditBugPage(bug));
             }
+        }
+
+        public void SaveNow()
+        {
+            // Persist current collections immediately
+            try
+            {
+                SaveAll();
+                // Refresh UI bindings after save
+                RefreshCollections();
+            }
+            catch
+            {
+                // ignore errors here; SaveAll already reports errors
+            }
+        }
+
+        public void UpdateBug(BugItem updated)
+        {
+            if (updated == null) return;
+
+            // Try to find and update in each collection
+            bool found = false;
+
+            for (int i = 0; i < NewBugs.Count; i++)
+            {
+                if (NewBugs[i].Id == updated.Id)
+                {
+                    // If status changed, remove and add to correct collection
+                    if (updated.Status != BugStatus.New)
+                    {
+                        NewBugs.RemoveAt(i);
+                        found = false; // will be added below
+                    }
+                    else
+                    {
+                        // update properties in place
+                        NewBugs[i].Title = updated.Title;
+                        NewBugs[i].Description = updated.Description;
+                        NewBugs[i].Project = updated.Project;
+                        NewBugs[i].AssigneeEmail = updated.AssigneeEmail;
+                        NewBugs[i].RepeatableSteps = updated.RepeatableSteps;
+                        NewBugs[i].ImagePaths = updated.ImagePaths;
+                        NewBugs[i].Steps = updated.Steps;
+                        NewBugs[i].Status = updated.Status;
+                        found = true;
+                    }
+                    break;
+                }
+            }
+
+            if (!found)
+            {
+                for (int i = 0; i < InProgressBugs.Count; i++)
+                {
+                    if (InProgressBugs[i].Id == updated.Id)
+                    {
+                        if (updated.Status != BugStatus.InProgress)
+                        {
+                            InProgressBugs.RemoveAt(i);
+                            found = false;
+                        }
+                        else
+                        {
+                            InProgressBugs[i].Title = updated.Title;
+                            InProgressBugs[i].Description = updated.Description;
+                            InProgressBugs[i].Project = updated.Project;
+                            InProgressBugs[i].AssigneeEmail = updated.AssigneeEmail;
+                            InProgressBugs[i].RepeatableSteps = updated.RepeatableSteps;
+                            InProgressBugs[i].ImagePaths = updated.ImagePaths;
+                            InProgressBugs[i].Steps = updated.Steps;
+                            InProgressBugs[i].Status = updated.Status;
+                            found = true;
+                        }
+                        break;
+                    }
+                }
+            }
+
+            if (!found)
+            {
+                for (int i = 0; i < ResolvedBugs.Count; i++)
+                {
+                    if (ResolvedBugs[i].Id == updated.Id)
+                    {
+                        if (updated.Status != BugStatus.Resolved)
+                        {
+                            ResolvedBugs.RemoveAt(i);
+                            found = false;
+                        }
+                        else
+                        {
+                            ResolvedBugs[i].Title = updated.Title;
+                            ResolvedBugs[i].Description = updated.Description;
+                            ResolvedBugs[i].Project = updated.Project;
+                            ResolvedBugs[i].AssigneeEmail = updated.AssigneeEmail;
+                            ResolvedBugs[i].RepeatableSteps = updated.RepeatableSteps;
+                            ResolvedBugs[i].ImagePaths = updated.ImagePaths;
+                            ResolvedBugs[i].Steps = updated.Steps;
+                            ResolvedBugs[i].Status = updated.Status;
+                            found = true;
+                        }
+                        break;
+                    }
+                }
+            }
+
+            // If not found in any collection, add based on status
+            if (!found)
+            {
+                switch (updated.Status)
+                {
+                    case BugStatus.New: NewBugs.Add(updated); break;
+                    case BugStatus.InProgress: InProgressBugs.Add(updated); break;
+                    case BugStatus.Resolved: ResolvedBugs.Add(updated); break;
+                    default: NewBugs.Add(updated); break;
+                }
+            }
+
+            // Persist and refresh
+            SaveAll();
+            RefreshCollections();
         }
     }
 
