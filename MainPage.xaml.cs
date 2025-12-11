@@ -385,6 +385,14 @@ namespace EPBugTracker
             ResolvedBugs.Clear();
             LoadFromFile();
         }
+
+        private async void OnEditClicked(object? sender, EventArgs e)
+        {
+            if (sender is Button btn && btn.BindingContext is BugItem bug)
+            {
+                await Navigation.PushAsync(new EditBugPage(bug));
+            }
+        }
     }
 
     public enum BugStatus { New, InProgress, Resolved }

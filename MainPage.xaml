@@ -33,6 +33,7 @@
                                         <Label Text="{Binding Description}" LineBreakMode="TailTruncation" />
                                         <Label Text="Assignee: {Binding AssigneeEmail}" FontSize="12" TextColor="#666" />
                                         <HorizontalStackLayout Spacing="6">
+                                            <Button Text="Edit" Clicked="OnEditClicked" />
                                             <Button Text="Assign" Clicked="OnAssignClicked" />
                                             <Button Text="Move" Clicked="OnMoveClicked" />
                                             <Button Text="Email" Clicked="OnEmailClicked" />
@@ -59,6 +60,7 @@
                                         <Label Text="{Binding Description}" LineBreakMode="TailTruncation" />
                                         <Label Text="Assignee: {Binding AssigneeEmail}" FontSize="12" TextColor="#666" />
                                         <HorizontalStackLayout Spacing="6">
+                                            <Button Text="Edit" Clicked="OnEditClicked" />
                                             <Button Text="Assign" Clicked="OnAssignClicked" />
                                             <Button Text="Move" Clicked="OnMoveClicked" />
                                             <Button Text="Email" Clicked="OnEmailClicked" />
@@ -85,6 +87,7 @@
                                         <Label Text="{Binding Description}" LineBreakMode="TailTruncation" />
                                         <Label Text="Assignee: {Binding AssigneeEmail}" FontSize="12" TextColor="#666" />
                                         <HorizontalStackLayout Spacing="6">
+                                            <Button Text="Edit" Clicked="OnEditClicked" />
                                             <Button Text="Assign" Clicked="OnAssignClicked" />
                                             <Button Text="Move" Clicked="OnMoveClicked" />
                                             <Button Text="Email" Clicked="OnEmailClicked" />
