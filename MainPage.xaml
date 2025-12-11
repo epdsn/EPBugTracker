@@ -26,7 +26,7 @@
             </Grid.ColumnDefinitions>
 
             <!-- New -->
-            <Border Grid.Column="0" Stroke="#888" Padding="8">
+            <Border Style="{StaticResource MainPanelBorder}" Grid.Column="0">
                 <VerticalStackLayout>
                     <Label Text="New" FontAttributes="Bold" />
                     <CollectionView x:Name="NewCollection" SelectionMode="None">
@@ -53,7 +53,7 @@
             </Border>
 
             <!-- In Progress -->
-            <Border Grid.Column="1" Stroke="#888" Padding="8">
+            <Border Style="{StaticResource MainPanelBorder}" Grid.Column="1">
                 <VerticalStackLayout>
                     <Label Text="In Progress" FontAttributes="Bold" />
                     <CollectionView x:Name="InProgressCollection" SelectionMode="None">
@@ -80,7 +80,7 @@
             </Border>
 
             <!-- Resolved -->
-            <Border Grid.Column="2" Stroke="#888" Padding="8">
+            <Border Style="{StaticResource MainPanelBorder}" Grid.Column="2">
                 <VerticalStackLayout>
                     <Label Text="Resolved" FontAttributes="Bold" />
                     <CollectionView x:Name="ResolvedCollection" SelectionMode="None">

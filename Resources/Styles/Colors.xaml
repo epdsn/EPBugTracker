@@ -18,6 +18,10 @@
     <Color x:Key="ToolbarBorder">#1F2937</Color>
     <Color x:Key="RouteLink">#D1D5DB</Color>
 
+    <!-- Main page panel colors -->
+    <Color x:Key="MainPageBackground">#111827</Color> <!-- rgb(17,24,39) -->
+    <Color x:Key="MainPageBorder">#E5E7EB</Color> <!-- rgb(229,231,235) -->
+
     <Color x:Key="White">White</Color>
     <Color x:Key="Black">Black</Color>
     <Color x:Key="Magenta">#D600AA</Color>
@@ -42,6 +46,9 @@
     <SolidColorBrush x:Key="ToolbarBackgroundBrush" Color="{StaticResource ToolbarBackground}" />
     <SolidColorBrush x:Key="ToolbarBorderBrush" Color="{StaticResource ToolbarBorder}" />
     <SolidColorBrush x:Key="RouteLinkBrush" Color="{StaticResource RouteLink}" />
+
+    <SolidColorBrush x:Key="MainPageBackgroundBrush" Color="{StaticResource MainPageBackground}" />
+    <SolidColorBrush x:Key="MainPageBorderBrush" Color="{StaticResource MainPageBorder}" />
 
     <SolidColorBrush x:Key="Gray100Brush" Color="{StaticResource Gray100}"/>
     <SolidColorBrush x:Key="Gray200Brush" Color="{StaticResource Gray200}"/>
