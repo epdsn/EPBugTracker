@@ -5,12 +5,11 @@
 
     <VerticalStackLayout Padding="12" Spacing="12">
         <!-- Centered, fixed-width container for the form -->
-        <Frame HorizontalOptions="Center"
-               VerticalOptions="Start"
-               WidthRequest="600"
-               Padding="12"
-               CornerRadius="8"
-               HasShadow="True">
+        <Border Style="{StaticResource MainPanelBorder}"
+                HorizontalOptions="Center"
+                VerticalOptions="Start"
+                WidthRequest="600"
+                Margin="0,0,0,0">
 
             <Grid ColumnSpacing="8" RowSpacing="8">
                 <Grid.ColumnDefinitions>
@@ -28,7 +27,7 @@
                 <Entry x:Name="EmailEntry" Placeholder="Email" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" />
                 <Button Text="Add/Update" Clicked="OnAddUpdateClicked" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Start" Margin="0,4,0,0" />
             </Grid>
-        </Frame>
+        </Border>
 
         <CollectionView x:Name="UsersCollection" SelectionMode="Single">
             <CollectionView.ItemTemplate>
