@@ -9,7 +9,7 @@
 
     <!-- Title + route links on one row, menu placed immediately after title -->
     <Shell.TitleView>
-        <Grid Padding="8" ColumnSpacing="12">
+        <Grid Padding="20, 0" ColumnSpacing="12">
             <Grid.ColumnDefinitions>
                 <!-- title width based on content -->
                 <ColumnDefinition Width="Auto" />
