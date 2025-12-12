@@ -5,6 +5,9 @@
              Title="Edit Bug">
 
     <ScrollView>
+      <Border Style="{StaticResource MainPanelBorder}" 
+              Margin="200, 40"
+              Grid.Column="1">
         <VerticalStackLayout Padding="16" Spacing="12">
             <Label Text="ID" />
             <Label x:Name="IdLabel" FontSize="12" TextColor="#666" />
@@ -44,5 +47,6 @@
                 <Button Text="Save" Clicked="OnSaveClicked" />
             </HorizontalStackLayout>
         </VerticalStackLayout>
+      </Border>
     </ScrollView>
 </ContentPage>
