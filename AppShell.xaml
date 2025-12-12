@@ -4,12 +4,46 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:EPBugTracker"
-    Title="EPBugTracker">
+    Title="EPBugTracker"
+    Shell.TabBarIsVisible="False">
 
-    <!-- Global title view shown in the top navigation area on every page -->
+    <!-- Title + route links on one row, menu placed immediately after title -->
     <Shell.TitleView>
-        <Grid Padding="8">
-            <Label Text="EP Bug Tracker" FontSize="20" VerticalOptions="Center" HorizontalOptions="Start" />
+        <Grid Padding="8" ColumnSpacing="12">
+            <Grid.ColumnDefinitions>
+                <!-- title width based on content -->
+                <ColumnDefinition Width="Auto" />
+                <!-- menu width based on content and placed next to title -->
+                <ColumnDefinition Width="Auto" />
+                <!-- filler to take remaining space -->
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- App title -->
+            <Label Text="EP Bug Tracker"
+                   FontSize="20"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Start"
+                   Grid.Column="0" />
+
+            <!-- Route links (styled using RouteLinkBrush) placed immediately after title -->
+            <HorizontalStackLayout 
+                Grid.Column="1" 
+                Spacing="12" 
+                VerticalOptions="Center" 
+                HorizontalOptions="Start">
+                <Button x:Name="HomeLinkBtn"
+                        Text="Home"
+                        Clicked="OnNavigateHome"
+                        BackgroundColor="Transparent"
+                        TextColor="{StaticResource RouteLink}" />
+
+                <Button x:Name="UsersLinkBtn"
+                        Text="Users"
+                        Clicked="OnNavigateUsers"
+                        BackgroundColor="Transparent"
+                        TextColor="{StaticResource RouteLink}" />
+            </HorizontalStackLayout>
         </Grid>
     </Shell.TitleView>
 
