@@ -5,12 +5,12 @@
 
     <VerticalStackLayout Padding="12" Spacing="12">
         <!-- Top bar: title on the far left, actions on the right -->
-        <Grid HorizontalOptions="Fill" ColumnSpacing="8">
+        <Grid HorizontalOptions="StartAndExpand" ColumnSpacing="8">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <HorizontalStackLayout Grid.Column="1" Spacing="8" HorizontalOptions="End">
+            <HorizontalStackLayout Grid.Column="1" Spacing="8" HorizontalOptions="Start">
                 <Button Text="Import" x:Name="ImportBtn" Clicked="OnImportClicked" />
                 <Button Text="Add Bug" Clicked="OnAddBugClicked" />
                 <Button Text="Diagnostics" Clicked="OnDiagnosticsClicked" />
