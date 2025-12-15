@@ -255,7 +255,7 @@ namespace EPBugTracker
                 {
                     var message = new EmailMessage {
                         Subject = $"Bug assigned: {bug.Title}",
-                        Body = $"Bug: {bug.Title}\n\n{bug.Description}\n\nStatus: {bug.Status}",
+                        Body = $"Bug: {bug.Title}\n\n{bug.Description}\n\nStatus: {bug.Status}\nPriority: {bug.Priority}",
                     };
                     message.To.Add(bug.AssigneeEmail);
 
@@ -399,6 +399,24 @@ namespace EPBugTracker
             }
         }
 
+        private async void OnDeleteClicked(object? sender, EventArgs e)
+        {
+            if (sender is Button btn && btn.BindingContext is BugItem bug)
+            {
+                var confirm = await DisplayAlert("Delete", "Once this is deleted, there is no turning back. Delete this bug?", "Delete", "Cancel");
+                if (!confirm) return;
+
+                // Remove from all collections (safe even if not present)
+                NewBugs.Remove(bug);
+                InProgressBugs.Remove(bug);
+                ResolvedBugs.Remove(bug);
+
+                // Persist change and refresh UI
+                SaveAll();
+                RefreshCollections();
+            }
+        }
+
         public void SaveNow()
         {
             // Persist current collections immediately
@@ -442,6 +460,7 @@ namespace EPBugTracker
                         NewBugs[i].ImagePaths = updated.ImagePaths;
                         NewBugs[i].Steps = updated.Steps;
                         NewBugs[i].Status = updated.Status;
+                        NewBugs[i].Priority = updated.Priority;
                         found = true;
                     }
                     break;
@@ -469,6 +488,7 @@ namespace EPBugTracker
                             InProgressBugs[i].ImagePaths = updated.ImagePaths;
                             InProgressBugs[i].Steps = updated.Steps;
                             InProgressBugs[i].Status = updated.Status;
+                            InProgressBugs[i].Priority = updated.Priority;
                             found = true;
                         }
                         break;
@@ -497,6 +517,7 @@ namespace EPBugTracker
                             ResolvedBugs[i].ImagePaths = updated.ImagePaths;
                             ResolvedBugs[i].Steps = updated.Steps;
                             ResolvedBugs[i].Status = updated.Status;
+                            ResolvedBugs[i].Priority = updated.Priority;
                             found = true;
                         }
                         break;
@@ -524,6 +545,8 @@ namespace EPBugTracker
 
     public enum BugStatus { New, InProgress, Resolved }
 
+    public enum BugPriority { Low, Medium, High }
+
     public class BugItem
     {
         public string Id { get; set; } = string.Empty;
@@ -536,5 +559,6 @@ namespace EPBugTracker
         public string RepeatableSteps { get; set; } = string.Empty;
         public List<string> ImagePaths { get; set; } = new();
         public List<string> Steps { get; set; } = new();
+        public BugPriority Priority { get; set; } = BugPriority.Medium;
     }
 }

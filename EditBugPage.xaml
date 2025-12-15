@@ -33,6 +33,15 @@
             </ScrollView>
             <Button Text="Add Attachment" Clicked="OnAddImageClicked" />
 
+            <Label Text="Priority" />
+            <Picker x:Name="PriorityPicker">
+                <Picker.Items>
+                    <x:String>Low</x:String>
+                    <x:String>Medium</x:String>
+                    <x:String>High</x:String>
+                </Picker.Items>
+            </Picker>
+
             <Label Text="Status" />
             <Picker x:Name="StatusPicker">
                 <Picker.Items>

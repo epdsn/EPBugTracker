@@ -15,6 +15,7 @@ namespace EPBugTracker
         {
             InitializeComponent();
             StatusPicker.SelectedIndex = 0;
+            PriorityPicker.SelectedIndex = 1;
 
             // bind steps collection
             StepsCollection.ItemsSource = steps;
@@ -136,7 +137,8 @@ namespace EPBugTracker
                 RepeatableSteps = repeatable,
                 Steps = new List<string>(steps),
                 ImagePaths = new List<string>(selectedImagePaths),
-                Status = (BugStatus)(StatusPicker.SelectedIndex == 0 ? BugStatus.New : (StatusPicker.SelectedIndex == 1 ? BugStatus.InProgress : BugStatus.Resolved))
+                Status = (BugStatus)(StatusPicker.SelectedIndex == 0 ? BugStatus.New : (StatusPicker.SelectedIndex == 1 ? BugStatus.InProgress : BugStatus.Resolved)),
+                Priority = (BugPriority)(PriorityPicker.SelectedIndex == 0 ? BugPriority.Low : (PriorityPicker.SelectedIndex == 1 ? BugPriority.Medium : BugPriority.High))
             };
 
             // Try to call AddToCollection on the previous page in the navigation stack (should be MainPage)

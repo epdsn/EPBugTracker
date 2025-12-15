@@ -1,4 +1,4 @@
-using Microsoft.Maui.Controls;
+ï»¿using Microsoft.Maui.Controls;
 using System.Collections.Generic;
 using Microsoft.Maui.Storage;
 using System.IO;
@@ -22,6 +22,7 @@ namespace EPBugTracker
             ProjectEntry.Text = bug.Project;
             AssigneeEntry.Text = bug.AssigneeEmail;
             StatusPicker.SelectedIndex = bug.Status == BugStatus.New ? 0 : (bug.Status == BugStatus.InProgress ? 1 : 2);
+            PriorityPicker.SelectedIndex = bug.Priority == BugPriority.Low ? 0 : (bug.Priority == BugPriority.Medium ? 1 : 2);
 
             if (bug.ImagePaths != null)
             {
@@ -147,6 +148,7 @@ namespace EPBugTracker
             current.AssigneeEmail = AssigneeEntry.Text ?? string.Empty;
             current.ImagePaths = new List<string>(selectedImagePaths);
             current.Status = (BugStatus)(StatusPicker.SelectedIndex == 0 ? BugStatus.New : (StatusPicker.SelectedIndex == 1 ? BugStatus.InProgress : BugStatus.Resolved));
+            current.Priority = (BugPriority)(PriorityPicker.SelectedIndex == 0 ? BugPriority.Low : (PriorityPicker.SelectedIndex == 1 ? BugPriority.Medium : BugPriority.High));
 
             System.Diagnostics.Debug.WriteLine($"EditBugPage: saving bug id={current.Id}");
 
@@ -158,7 +160,7 @@ namespace EPBugTracker
             }
             else
             {
-                System.Diagnostics.Debug.WriteLine("EditBugPage: MainPage instance not found — updating bugs.xml directly");
+                System.Diagnostics.Debug.WriteLine("EditBugPage: MainPage instance not found ï¿½ updating bugs.xml directly");
 
                 try
                 {
