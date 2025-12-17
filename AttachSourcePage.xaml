@@ -1,0 +1,45 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EPBugTracker.AttachSourcePage"
+             Title="Attach Project Source">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="12">
+            <Label Text="Choose source type" FontAttributes="Bold" />
+
+            <HorizontalStackLayout Spacing="12">
+                <RadioButton x:Name="LocalRadio" Content="Local Git" GroupName="SourceType" CheckedChanged="OnSourceTypeChanged" />
+                <RadioButton x:Name="GitHubRadio" Content="GitHub URL" GroupName="SourceType" CheckedChanged="OnSourceTypeChanged" />
+            </HorizontalStackLayout>
+
+            <!-- Local Git block -->
+            <VerticalStackLayout x:Name="LocalPanel" IsVisible="True" Spacing="8">
+                <Label Text="Local repository path" />
+                <Entry x:Name="LocalPathEntry" Placeholder="C:\\projects\\myrepo or /home/user/myrepo" />
+                <HorizontalStackLayout Spacing="8">
+                    <Button Text="Validate" Clicked="OnValidateLocalClicked" />
+                    <Button Text="List Branches" Clicked="OnListLocalBranchesClicked" />
+                </HorizontalStackLayout>
+                <Label Text="Branches" FontAttributes="Bold" />
+                <Picker x:Name="LocalBranchesPicker" Title="Select branch" />
+            </VerticalStackLayout>
+
+            <!-- GitHub block -->
+            <VerticalStackLayout x:Name="GitHubPanel" IsVisible="False" Spacing="8">
+                <Label Text="GitHub repository URL" />
+                <Entry x:Name="RepoUrlEntry" Placeholder="https://github.com/owner/repo" />
+                <HorizontalStackLayout Spacing="8">
+                    <Button Text="Validate URL" Clicked="OnValidateRepoUrlClicked" />
+                    <Button Text="List Branches" Clicked="OnListRemoteBranchesClicked" />
+                </HorizontalStackLayout>
+                <Label Text="Branches" FontAttributes="Bold" />
+                <Picker x:Name="RemoteBranchesPicker" Title="Select branch" />
+            </VerticalStackLayout>
+
+            <HorizontalStackLayout Spacing="12" HorizontalOptions="End">
+                <Button Text="Cancel" Clicked="OnCancelClicked" />
+                <Button Text="Attach" Clicked="OnAttachClicked" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

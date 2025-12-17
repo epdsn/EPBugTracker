@@ -43,6 +43,12 @@
                         Clicked="OnNavigateUsers"
                         BackgroundColor="Transparent"
                         TextColor="{StaticResource RouteLink}" />
+
+                <Button x:Name="AttachLinkBtn"
+                        Text="Sources"
+                        Clicked="OnNavigateAttach"
+                        BackgroundColor="Transparent"
+                        TextColor="{StaticResource RouteLink}" />
             </HorizontalStackLayout>
         </Grid>
     </Shell.TitleView>

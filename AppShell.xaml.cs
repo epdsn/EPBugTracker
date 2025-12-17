@@ -30,12 +30,14 @@ namespace EPBugTracker
                 // decide active state by route name presence
                 var isHome = location.IndexOf("MainPage", StringComparison.OrdinalIgnoreCase) >= 0;
                 var isUsers = location.IndexOf("UsersPage", StringComparison.OrdinalIgnoreCase) >= 0;
+                var isAttach = location.IndexOf("AttachSourcePage", StringComparison.OrdinalIgnoreCase) >= 0;
 
                 var active = (Color)Application.Current.Resources["White"];
                 var routeLink = (Color)Application.Current.Resources["RouteLink"];
 
                 if (HomeLinkBtn != null) HomeLinkBtn.TextColor = isHome ? active : routeLink;
                 if (UsersLinkBtn != null) UsersLinkBtn.TextColor = isUsers ? active : routeLink;
+                if (AttachLinkBtn != null) AttachLinkBtn.TextColor = isAttach ? active : routeLink;
             }
             catch
             {
@@ -58,6 +60,12 @@ namespace EPBugTracker
         {
             // Push AddBugPage on the current navigation stack
             await Shell.Current.Navigation.PushAsync(new AddBugPage());
+        }
+
+        private async void OnNavigateAttach(object? sender, System.EventArgs e)
+        {
+            // Push AttachSourcePage on the current navigation stack
+            await Shell.Current.Navigation.PushAsync(new AttachSourcePage());
         }
 
         private void OnReloadClicked(object? sender, System.EventArgs e)

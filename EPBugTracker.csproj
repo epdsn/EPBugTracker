@@ -66,6 +66,9 @@
 	  <MauiXaml Update="AddBugPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="AttachSourcePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="EditBugPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
