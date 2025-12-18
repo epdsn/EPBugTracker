@@ -35,9 +35,13 @@ namespace EPBugTracker
                 var active = (Color)Application.Current.Resources["White"];
                 var routeLink = (Color)Application.Current.Resources["RouteLink"];
 
-                if (HomeLinkBtn != null) HomeLinkBtn.TextColor = isHome ? active : routeLink;
-                if (UsersLinkBtn != null) UsersLinkBtn.TextColor = isUsers ? active : routeLink;
-                if (AttachLinkBtn != null) AttachLinkBtn.TextColor = isAttach ? active : routeLink;
+                var homeBtn = this.FindByName<Button>("HomeLinkBtn");
+                var usersBtn = this.FindByName<Button>("UsersLinkBtn");
+                var attachBtn = this.FindByName<Button>("AttachLinkBtn");
+
+                if (homeBtn != null) homeBtn.TextColor = isHome ? active : routeLink;
+                if (usersBtn != null) usersBtn.TextColor = isUsers ? active : routeLink;
+                if (attachBtn != null) attachBtn.TextColor = isAttach ? active : routeLink;
             }
             catch
             {

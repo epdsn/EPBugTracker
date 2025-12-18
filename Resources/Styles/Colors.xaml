@@ -14,7 +14,7 @@
 
     <!-- Toolbar colors -->
     <!-- rgba(17,24,39,0.5) -> #80111727 (AARRGGBB) -->
-    <Color x:Key="ToolbarBackground">#80111727</Color>
+    <Color x:Key="ToolbarBackground">#090C14</Color>
     <Color x:Key="ToolbarBorder">#1F2937</Color>
     <Color x:Key="RouteLink">#D1D5DB</Color>
 
