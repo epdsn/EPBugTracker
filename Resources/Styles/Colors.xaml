@@ -22,6 +22,9 @@
     <Color x:Key="MainPageBackground">#111827</Color> <!-- rgb(17,24,39) -->
     <Color x:Key="MainPageBorder">#E5E7EB</Color> <!-- rgb(229,231,235) -->
 
+    <!-- Error color for validation text -->
+    <Color x:Key="ErrorColor">#994FE0</Color>
+
     <Color x:Key="White">White</Color>
     <Color x:Key="Black">Black</Color>
     <Color x:Key="Magenta">#D600AA</Color>
@@ -49,6 +52,8 @@
 
     <SolidColorBrush x:Key="MainPageBackgroundBrush" Color="{StaticResource MainPageBackground}" />
     <SolidColorBrush x:Key="MainPageBorderBrush" Color="{StaticResource MainPageBorder}" />
+
+    <SolidColorBrush x:Key="ErrorBrush" Color="{StaticResource ErrorColor}" />
 
     <SolidColorBrush x:Key="Gray100Brush" Color="{StaticResource Gray100}"/>
     <SolidColorBrush x:Key="Gray200Brush" Color="{StaticResource Gray200}"/>
