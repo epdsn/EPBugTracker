@@ -4,6 +4,11 @@
              Title="Attach Project Source">
 
     <ScrollView>
+      <Border Style="{StaticResource MainPanelBorder}"
+                HorizontalOptions="Center"
+                VerticalOptions="Start"
+                WidthRequest="600"
+                Margin="0,0,0,0">
         <VerticalStackLayout Padding="16" Spacing="12">
             <Label Text="Choose source type" FontAttributes="Bold" />
 
@@ -41,5 +46,6 @@
                 <Button Text="Attach" Clicked="OnAttachClicked" />
             </HorizontalStackLayout>
         </VerticalStackLayout>
+      </Border>
     </ScrollView>
 </ContentPage>
