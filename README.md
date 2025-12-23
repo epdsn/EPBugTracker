@@ -1,6 +1,6 @@
 # EPBugTracker
 
-EPBugTracker is a cross-platform bug tracking and review application built with .NET MAUI targeting .NET 10. The app helps teams manage, review, and track bug fixes across projects and platforms (Windows, macOS, iOS, Android).
+EPBugTracker is a cross-platform bug tracking and review application built with .NET MAUI targeting .NET 10. The app helps teams manage, review, and track bug fixes across projects and platforms.
 
 Key features
 - Create, edit and organize bug reports
