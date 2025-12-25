@@ -9,6 +9,7 @@ Key features
 - Attach screenshots and logs to bug reports
 - Search, filter and tag issues
 - Cross-platform UI using .NET MAUI
+- Connect to Git or Github repo
 
 Getting started
 
